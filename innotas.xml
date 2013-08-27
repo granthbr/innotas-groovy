@@ -1,0 +1,1726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://services" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax21="http://objects.services/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://objects.services/xsd">
+      <xs:complexType name="TimesheetEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="billableRate" type="xs:double"/>
+          <xs:element minOccurs="0" name="companyId" type="xs:long"/>
+          <xs:element minOccurs="0" name="entryDate" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="entryHours" type="xs:double"/>
+          <xs:element minOccurs="0" name="entryId" type="xs:long"/>
+          <xs:element minOccurs="0" name="entryTypeId" type="xs:long"/>
+          <xs:element minOccurs="0" name="internalRate" type="xs:double"/>
+          <xs:element minOccurs="0" name="isBillable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="isProductive" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="level1Id" type="xs:long"/>
+          <xs:element minOccurs="0" name="level2Id" type="xs:long"/>
+          <xs:element minOccurs="0" name="level3Id" type="xs:long"/>
+          <xs:element minOccurs="0" name="locationId" type="xs:long"/>
+          <xs:element minOccurs="0" name="notes" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="state" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ValuePair">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="elementValue" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServerInfoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="customerName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="primaryServerUrl" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="secondaryServerUrl" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EntityObj">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+          <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="methodValues" nillable="true" type="ax21:ValuePair"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EntityHistory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dateModified" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+          <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+          <xs:element minOccurs="0" name="modifiedBy" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Timesheet">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entriesAccount" nillable="true" type="ax21:TimesheetEntry"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entriesOther" nillable="true" type="ax21:TimesheetEntry"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entriesPortfolio" nillable="true" type="ax21:TimesheetEntry"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entriesProject" nillable="true" type="ax21:TimesheetEntry"/>
+          <xs:element minOccurs="0" name="satisfactionId" type="xs:long"/>
+          <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="summaryNotes" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+          <xs:element minOccurs="0" name="timesheetPeriodId" type="xs:long"/>
+          <xs:element minOccurs="0" name="userId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TimesheetVariable">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="levelVariable" nillable="true" type="ax21:ValuePair"/>
+          <xs:element minOccurs="0" name="variableTypeId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProfileVariable">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="elementValue" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="skillRangeTitle" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="skillRangeValues" nillable="true" type="ax21:ValuePair"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="subCategories" nillable="true" type="ax21:ValuePair"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResourceProfileSetting">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="profileSetting" nillable="true" type="ax21:ProfileSetting"/>
+          <xs:element minOccurs="0" name="resourceId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProfileSetting">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="categoryId" type="xs:long"/>
+          <xs:element minOccurs="0" name="profileSettingId" type="xs:long"/>
+          <xs:element minOccurs="0" name="rangeValueId" type="xs:long"/>
+          <xs:element minOccurs="0" name="subCategoryId" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ObjectMethod">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="defaultValue" nillable="true" type="xs:anyType"/>
+          <xs:element minOccurs="0" name="fieldLength" type="xs:long"/>
+          <xs:element minOccurs="0" name="fieldSubTypeId" type="xs:long"/>
+          <xs:element minOccurs="0" name="fieldTypeId" type="xs:long"/>
+          <xs:element minOccurs="0" name="isRequired" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="label" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="method" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="methodId" type="xs:long"/>
+          <xs:element minOccurs="0" name="onInsert" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="onSelect" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="onUpdate" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="sequence" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Contour">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="allocationEndDate" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="allocationStartDate" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+          <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entries" nillable="true" type="ax21:ContourEntry"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ContourEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entryDate" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="entryHours" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services" xmlns:ax22="http://objects.services/xsd">
+      <xs:import namespace="http://objects.services/xsd"/>
+      <xs:element name="updateTimesheetEntries">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheetEntries" nillable="true" type="ax21:TimesheetEntry"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateTimesheetEntriesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateEntity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="valuePairs" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateEntityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateAnEntityByMethodId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+            <xs:element minOccurs="0" name="methodId" type="xs:long"/>
+            <xs:element minOccurs="0" name="methodValue" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateAnEntityByMethodIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitTimesheets">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheetIds" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitTimesheetsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitTimesheet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitTimesheetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitRequests">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="requestIds" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitRequestsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="requestId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="serverInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="serverInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax21:ServerInfoResponse"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="selectEntity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldsRequest" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="selectEntityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax21:EntityObj"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logout">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logoutResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="login">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="loginResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insertNote">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="parentEntityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+            <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="content" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insertNoteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insertEntity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="valuePairs" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insertEntityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUpdateHistory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="startYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="endYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="showRepeatingPerDay" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="simpleDateFormat" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUpdateHistoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:EntityHistory"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheets">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheetIds" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetVariables">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="userId" type="xs:long"/>
+            <xs:element minOccurs="0" name="periodId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetVariablesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:TimesheetVariable"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetForUsers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="userIds" type="xs:long"/>
+            <xs:element minOccurs="0" name="startYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="endYYYYMMDD" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetForUsersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetForUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="userId" type="xs:long"/>
+            <xs:element minOccurs="0" name="startYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="endYYYYMMDD" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetForUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTimesheetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTeamMemberId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityInstanceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="resourceId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTeamMemberIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSkillCategories">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSkillCategoriesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ProfileVariable"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getResourceProfileSetting">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="resourceId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getResourceProfileSettingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ResourceProfileSetting"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRequestTypes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="idOrTitle" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRequestTypesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRequestFields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="requestTypeId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRequestFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ObjectMethod"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPortfolioTypes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="idOrTitle" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPortfolioTypesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPortfolioFields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="portfolioTypeId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPortfolioFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ObjectMethod"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMemberId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityInstanceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="resourceId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMemberIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getListValues">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="fieldTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="fieldSubTypeId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getListValuesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEntityFields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="mode" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEntityFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ObjectMethod"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEntitiesByFilter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="filter" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldsRequest" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEntitiesByFilterResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:EntityObj"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDeleteHistory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="startYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="endYYYYMMDD" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="simpleDateFormat" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDeleteHistoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:EntityHistory"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getContour">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+            <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getContourResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Contour"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findEntity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="searchValuePairs" nillable="true" type="ax21:ValuePair"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldsRequest" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findEntityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:EntityObj"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteTimesheetEntries">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheetEntryId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteTimesheetEntriesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteEntity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteEntityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteEntities">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entityIds" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteEntitiesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceTimesheets">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheets" nillable="true" type="ax21:Timesheet"/>
+            <xs:element minOccurs="0" name="autoSubmitAll" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceTimesheetsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceTimesheetEntries">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="timesheet" nillable="true" type="ax21:Timesheet"/>
+            <xs:element minOccurs="0" name="autoSubmit" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceTimesheetEntriesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Timesheet"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceResourceProfileSetting">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="resourceProfileSettings" nillable="true" type="ax21:ResourceProfileSetting"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceResourceProfileSettingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ResourceProfileSetting"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="requestTypeId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="valuePairs" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplacePortfolio">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="portfolioTypeId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="valuePairs" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplacePortfolioResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplace">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="newObj" nillable="true" type="ax21:EntityObj"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="searchValuePairs" nillable="true" type="ax21:ValuePair"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createOrReplaceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="approveTimesheet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="timesheetId" type="xs:long"/>
+            <xs:element minOccurs="0" name="approvalLevel" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="approveTimesheetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="allocateResourceTime">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="taskIds" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="resourceIds" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="projectRoleIds" type="xs:long"/>
+            <xs:element minOccurs="0" name="estimateHours" type="xs:float"/>
+            <xs:element minOccurs="0" name="scheduleHours" type="xs:float"/>
+            <xs:element minOccurs="0" name="percentOfTime" type="xs:float"/>
+            <xs:element minOccurs="0" name="hoursToComplete" type="xs:float"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="allocateResourceTimeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="allocateContour">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityTypeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="entityId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="contourEntries" nillable="true" type="ax21:ContourEntry"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="allocateContourResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createOrReplaceResourceProfileSettingRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplaceResourceProfileSetting"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceResourceProfileSettingResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplaceResourceProfileSettingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="logoutRequest">
+    <wsdl:part name="parameters" element="ns:logout"/>
+  </wsdl:message>
+  <wsdl:message name="logoutResponse">
+    <wsdl:part name="parameters" element="ns:logoutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="insertEntityRequest">
+    <wsdl:part name="parameters" element="ns:insertEntity"/>
+  </wsdl:message>
+  <wsdl:message name="insertEntityResponse">
+    <wsdl:part name="parameters" element="ns:insertEntityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="insertNoteRequest">
+    <wsdl:part name="parameters" element="ns:insertNote"/>
+  </wsdl:message>
+  <wsdl:message name="insertNoteResponse">
+    <wsdl:part name="parameters" element="ns:insertNoteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getRequestFieldsRequest">
+    <wsdl:part name="parameters" element="ns:getRequestFields"/>
+  </wsdl:message>
+  <wsdl:message name="getRequestFieldsResponse">
+    <wsdl:part name="parameters" element="ns:getRequestFieldsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetForUserRequest">
+    <wsdl:part name="parameters" element="ns:getTimesheetForUser"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetForUserResponse">
+    <wsdl:part name="parameters" element="ns:getTimesheetForUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceRequestRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplaceRequest"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceRequestResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplaceRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTeamMemberIdRequest">
+    <wsdl:part name="parameters" element="ns:getTeamMemberId"/>
+  </wsdl:message>
+  <wsdl:message name="getTeamMemberIdResponse">
+    <wsdl:part name="parameters" element="ns:getTeamMemberIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="deleteEntitiesRequest">
+    <wsdl:part name="parameters" element="ns:deleteEntities"/>
+  </wsdl:message>
+  <wsdl:message name="deleteEntitiesResponse">
+    <wsdl:part name="parameters" element="ns:deleteEntitiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="allocateContourRequest">
+    <wsdl:part name="parameters" element="ns:allocateContour"/>
+  </wsdl:message>
+  <wsdl:message name="allocateContourResponse">
+    <wsdl:part name="parameters" element="ns:allocateContourResponse"/>
+  </wsdl:message>
+  <wsdl:message name="allocateResourceTimeRequest">
+    <wsdl:part name="parameters" element="ns:allocateResourceTime"/>
+  </wsdl:message>
+  <wsdl:message name="allocateResourceTimeResponse">
+    <wsdl:part name="parameters" element="ns:allocateResourceTimeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetForUsersRequest">
+    <wsdl:part name="parameters" element="ns:getTimesheetForUsers"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetForUsersResponse">
+    <wsdl:part name="parameters" element="ns:getTimesheetForUsersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getRequestTypesRequest">
+    <wsdl:part name="parameters" element="ns:getRequestTypes"/>
+  </wsdl:message>
+  <wsdl:message name="getRequestTypesResponse">
+    <wsdl:part name="parameters" element="ns:getRequestTypesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUpdateHistoryRequest">
+    <wsdl:part name="parameters" element="ns:getUpdateHistory"/>
+  </wsdl:message>
+  <wsdl:message name="getUpdateHistoryResponse">
+    <wsdl:part name="parameters" element="ns:getUpdateHistoryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetRequest">
+    <wsdl:part name="parameters" element="ns:getTimesheet"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetResponse">
+    <wsdl:part name="parameters" element="ns:getTimesheetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateAnEntityByMethodIdRequest">
+    <wsdl:part name="parameters" element="ns:updateAnEntityByMethodId"/>
+  </wsdl:message>
+  <wsdl:message name="updateAnEntityByMethodIdResponse">
+    <wsdl:part name="parameters" element="ns:updateAnEntityByMethodIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="submitRequestRequest">
+    <wsdl:part name="parameters" element="ns:submitRequest"/>
+  </wsdl:message>
+  <wsdl:message name="submitRequestResponse">
+    <wsdl:part name="parameters" element="ns:submitRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDeleteHistoryRequest">
+    <wsdl:part name="parameters" element="ns:getDeleteHistory"/>
+  </wsdl:message>
+  <wsdl:message name="getDeleteHistoryResponse">
+    <wsdl:part name="parameters" element="ns:getDeleteHistoryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateEntityRequest">
+    <wsdl:part name="parameters" element="ns:updateEntity"/>
+  </wsdl:message>
+  <wsdl:message name="updateEntityResponse">
+    <wsdl:part name="parameters" element="ns:updateEntityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceTimesheetsRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplaceTimesheets"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceTimesheetsResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplaceTimesheetsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetVariablesRequest">
+    <wsdl:part name="parameters" element="ns:getTimesheetVariables"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetVariablesResponse">
+    <wsdl:part name="parameters" element="ns:getTimesheetVariablesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceTimesheetEntriesRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplaceTimesheetEntries"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceTimesheetEntriesResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplaceTimesheetEntriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="parameters" element="ns:login"/>
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="parameters" element="ns:loginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getPortfolioFieldsRequest">
+    <wsdl:part name="parameters" element="ns:getPortfolioFields"/>
+  </wsdl:message>
+  <wsdl:message name="getPortfolioFieldsResponse">
+    <wsdl:part name="parameters" element="ns:getPortfolioFieldsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplacePortfolioRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplacePortfolio"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplacePortfolioResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplacePortfolioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="approveTimesheetRequest">
+    <wsdl:part name="parameters" element="ns:approveTimesheet"/>
+  </wsdl:message>
+  <wsdl:message name="approveTimesheetResponse">
+    <wsdl:part name="parameters" element="ns:approveTimesheetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="deleteEntityRequest">
+    <wsdl:part name="parameters" element="ns:deleteEntity"/>
+  </wsdl:message>
+  <wsdl:message name="deleteEntityResponse">
+    <wsdl:part name="parameters" element="ns:deleteEntityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="selectEntityRequest">
+    <wsdl:part name="parameters" element="ns:selectEntity"/>
+  </wsdl:message>
+  <wsdl:message name="selectEntityResponse">
+    <wsdl:part name="parameters" element="ns:selectEntityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetsRequest">
+    <wsdl:part name="parameters" element="ns:getTimesheets"/>
+  </wsdl:message>
+  <wsdl:message name="getTimesheetsResponse">
+    <wsdl:part name="parameters" element="ns:getTimesheetsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheetRequest">
+    <wsdl:part name="parameters" element="ns:submitTimesheet"/>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheetResponse">
+    <wsdl:part name="parameters" element="ns:submitTimesheetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getEntityFieldsRequest">
+    <wsdl:part name="parameters" element="ns:getEntityFields"/>
+  </wsdl:message>
+  <wsdl:message name="getEntityFieldsResponse">
+    <wsdl:part name="parameters" element="ns:getEntityFieldsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="deleteTimesheetEntriesRequest">
+    <wsdl:part name="parameters" element="ns:deleteTimesheetEntries"/>
+  </wsdl:message>
+  <wsdl:message name="deleteTimesheetEntriesResponse">
+    <wsdl:part name="parameters" element="ns:deleteTimesheetEntriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getListValuesRequest">
+    <wsdl:part name="parameters" element="ns:getListValues"/>
+  </wsdl:message>
+  <wsdl:message name="getListValuesResponse">
+    <wsdl:part name="parameters" element="ns:getListValuesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getContourRequest">
+    <wsdl:part name="parameters" element="ns:getContour"/>
+  </wsdl:message>
+  <wsdl:message name="getContourResponse">
+    <wsdl:part name="parameters" element="ns:getContourResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceRequest">
+    <wsdl:part name="parameters" element="ns:createOrReplace"/>
+  </wsdl:message>
+  <wsdl:message name="createOrReplaceResponse">
+    <wsdl:part name="parameters" element="ns:createOrReplaceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheetsRequest">
+    <wsdl:part name="parameters" element="ns:submitTimesheets"/>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheetsResponse">
+    <wsdl:part name="parameters" element="ns:submitTimesheetsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="submitRequestsRequest">
+    <wsdl:part name="parameters" element="ns:submitRequests"/>
+  </wsdl:message>
+  <wsdl:message name="submitRequestsResponse">
+    <wsdl:part name="parameters" element="ns:submitRequestsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="serverInfoRequest">
+    <wsdl:part name="parameters" element="ns:serverInfo"/>
+  </wsdl:message>
+  <wsdl:message name="serverInfoResponse">
+    <wsdl:part name="parameters" element="ns:serverInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateTimesheetEntriesRequest">
+    <wsdl:part name="parameters" element="ns:updateTimesheetEntries"/>
+  </wsdl:message>
+  <wsdl:message name="updateTimesheetEntriesResponse">
+    <wsdl:part name="parameters" element="ns:updateTimesheetEntriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSkillCategoriesRequest">
+    <wsdl:part name="parameters" element="ns:getSkillCategories"/>
+  </wsdl:message>
+  <wsdl:message name="getSkillCategoriesResponse">
+    <wsdl:part name="parameters" element="ns:getSkillCategoriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getResourceProfileSettingRequest">
+    <wsdl:part name="parameters" element="ns:getResourceProfileSetting"/>
+  </wsdl:message>
+  <wsdl:message name="getResourceProfileSettingResponse">
+    <wsdl:part name="parameters" element="ns:getResourceProfileSettingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getPortfolioTypesRequest">
+    <wsdl:part name="parameters" element="ns:getPortfolioTypes"/>
+  </wsdl:message>
+  <wsdl:message name="getPortfolioTypesResponse">
+    <wsdl:part name="parameters" element="ns:getPortfolioTypesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="findEntityRequest">
+    <wsdl:part name="parameters" element="ns:findEntity"/>
+  </wsdl:message>
+  <wsdl:message name="findEntityResponse">
+    <wsdl:part name="parameters" element="ns:findEntityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getEntitiesByFilterRequest">
+    <wsdl:part name="parameters" element="ns:getEntitiesByFilter"/>
+  </wsdl:message>
+  <wsdl:message name="getEntitiesByFilterResponse">
+    <wsdl:part name="parameters" element="ns:getEntitiesByFilterResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getMemberIdRequest">
+    <wsdl:part name="parameters" element="ns:getMemberId"/>
+  </wsdl:message>
+  <wsdl:message name="getMemberIdResponse">
+    <wsdl:part name="parameters" element="ns:getMemberIdResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="MainService_SOAP11HTTPS_client2_new_Interface">
+    <wsdl:operation name="createOrReplaceResourceProfileSetting">
+      <wsdl:input message="ser:createOrReplaceResourceProfileSettingRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplaceResourceProfileSettingResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdl:input message="ser:logoutRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:logoutResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="insertEntity">
+      <wsdl:input message="ser:insertEntityRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:insertEntityResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="insertNote">
+      <wsdl:input message="ser:insertNoteRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:insertNoteResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getRequestFields">
+      <wsdl:input message="ser:getRequestFieldsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getRequestFieldsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetForUser">
+      <wsdl:input message="ser:getTimesheetForUserRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTimesheetForUserResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceRequest">
+      <wsdl:input message="ser:createOrReplaceRequestRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplaceRequestResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTeamMemberId">
+      <wsdl:input message="ser:getTeamMemberIdRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTeamMemberIdResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteEntities">
+      <wsdl:input message="ser:deleteEntitiesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:deleteEntitiesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="allocateContour">
+      <wsdl:input message="ser:allocateContourRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:allocateContourResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="allocateResourceTime">
+      <wsdl:input message="ser:allocateResourceTimeRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:allocateResourceTimeResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetForUsers">
+      <wsdl:input message="ser:getTimesheetForUsersRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTimesheetForUsersResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getRequestTypes">
+      <wsdl:input message="ser:getRequestTypesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getRequestTypesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUpdateHistory">
+      <wsdl:input message="ser:getUpdateHistoryRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getUpdateHistoryResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheet">
+      <wsdl:input message="ser:getTimesheetRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTimesheetResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateAnEntityByMethodId">
+      <wsdl:input message="ser:updateAnEntityByMethodIdRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:updateAnEntityByMethodIdResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="submitRequest">
+      <wsdl:input message="ser:submitRequestRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:submitRequestResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDeleteHistory">
+      <wsdl:input message="ser:getDeleteHistoryRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getDeleteHistoryResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateEntity">
+      <wsdl:input message="ser:updateEntityRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:updateEntityResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceTimesheets">
+      <wsdl:input message="ser:createOrReplaceTimesheetsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplaceTimesheetsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetVariables">
+      <wsdl:input message="ser:getTimesheetVariablesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTimesheetVariablesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceTimesheetEntries">
+      <wsdl:input message="ser:createOrReplaceTimesheetEntriesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplaceTimesheetEntriesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input message="ser:loginRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:loginResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioFields">
+      <wsdl:input message="ser:getPortfolioFieldsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getPortfolioFieldsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplacePortfolio">
+      <wsdl:input message="ser:createOrReplacePortfolioRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplacePortfolioResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="approveTimesheet">
+      <wsdl:input message="ser:approveTimesheetRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:approveTimesheetResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteEntity">
+      <wsdl:input message="ser:deleteEntityRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:deleteEntityResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="selectEntity">
+      <wsdl:input message="ser:selectEntityRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:selectEntityResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheets">
+      <wsdl:input message="ser:getTimesheetsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getTimesheetsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheet">
+      <wsdl:input message="ser:submitTimesheetRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:submitTimesheetResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getEntityFields">
+      <wsdl:input message="ser:getEntityFieldsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getEntityFieldsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTimesheetEntries">
+      <wsdl:input message="ser:deleteTimesheetEntriesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:deleteTimesheetEntriesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getListValues">
+      <wsdl:input message="ser:getListValuesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getListValuesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getContour">
+      <wsdl:input message="ser:getContourRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getContourResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplace">
+      <wsdl:input message="ser:createOrReplaceRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:createOrReplaceResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheets">
+      <wsdl:input message="ser:submitTimesheetsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:submitTimesheetsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="submitRequests">
+      <wsdl:input message="ser:submitRequestsRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:submitRequestsResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="serverInfo">
+      <wsdl:input message="ser:serverInfoRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:serverInfoResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateTimesheetEntries">
+      <wsdl:input message="ser:updateTimesheetEntriesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:updateTimesheetEntriesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSkillCategories">
+      <wsdl:input message="ser:getSkillCategoriesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getSkillCategoriesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getResourceProfileSetting">
+      <wsdl:input message="ser:getResourceProfileSettingRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getResourceProfileSettingResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioTypes">
+      <wsdl:input message="ser:getPortfolioTypesRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getPortfolioTypesResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="findEntity">
+      <wsdl:input message="ser:findEntityRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:findEntityResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getEntitiesByFilter">
+      <wsdl:input message="ser:getEntitiesByFilterRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getEntitiesByFilterResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMemberId">
+      <wsdl:input message="ser:getMemberIdRequest" xmlns:ser="http://services"/>
+      <wsdl:output message="ser:getMemberIdResponse" xmlns:ser="http://services"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MainService_SOAP11HTTPS_client2_new_Binding" type="ser:MainService_SOAP11HTTPS_client2_new_Interface" xmlns:ser="http://services">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="createOrReplaceResourceProfileSetting">
+      <soap:operation soapAction="urn:createOrReplaceResourceProfileSetting" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap:operation soapAction="urn:logout" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertEntity">
+      <soap:operation soapAction="urn:insertEntity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNote">
+      <soap:operation soapAction="urn:insertNote" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRequestFields">
+      <soap:operation soapAction="urn:getRequestFields" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetForUser">
+      <soap:operation soapAction="urn:getTimesheetForUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceRequest">
+      <soap:operation soapAction="urn:createOrReplaceRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTeamMemberId">
+      <soap:operation soapAction="urn:getTeamMemberId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteEntities">
+      <soap:operation soapAction="urn:deleteEntities" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="allocateContour">
+      <soap:operation soapAction="urn:allocateContour" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="allocateResourceTime">
+      <soap:operation soapAction="urn:allocateResourceTime" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetForUsers">
+      <soap:operation soapAction="urn:getTimesheetForUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRequestTypes">
+      <soap:operation soapAction="urn:getRequestTypes" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUpdateHistory">
+      <soap:operation soapAction="urn:getUpdateHistory" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheet">
+      <soap:operation soapAction="urn:getTimesheet" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateAnEntityByMethodId">
+      <soap:operation soapAction="urn:updateAnEntityByMethodId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitRequest">
+      <soap:operation soapAction="urn:submitRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeleteHistory">
+      <soap:operation soapAction="urn:getDeleteHistory" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateEntity">
+      <soap:operation soapAction="urn:updateEntity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceTimesheets">
+      <soap:operation soapAction="urn:createOrReplaceTimesheets" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheetVariables">
+      <soap:operation soapAction="urn:getTimesheetVariables" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplaceTimesheetEntries">
+      <soap:operation soapAction="urn:createOrReplaceTimesheetEntries" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap:operation soapAction="urn:login" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioFields">
+      <soap:operation soapAction="urn:getPortfolioFields" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplacePortfolio">
+      <soap:operation soapAction="urn:createOrReplacePortfolio" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="approveTimesheet">
+      <soap:operation soapAction="urn:approveTimesheet" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteEntity">
+      <soap:operation soapAction="urn:deleteEntity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selectEntity">
+      <soap:operation soapAction="urn:selectEntity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimesheets">
+      <soap:operation soapAction="urn:getTimesheets" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheet">
+      <soap:operation soapAction="urn:submitTimesheet" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEntityFields">
+      <soap:operation soapAction="urn:getEntityFields" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTimesheetEntries">
+      <soap:operation soapAction="urn:deleteTimesheetEntries" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListValues">
+      <soap:operation soapAction="urn:getListValues" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContour">
+      <soap:operation soapAction="urn:getContour" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrReplace">
+      <soap:operation soapAction="urn:createOrReplace" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheets">
+      <soap:operation soapAction="urn:submitTimesheets" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitRequests">
+      <soap:operation soapAction="urn:submitRequests" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="serverInfo">
+      <soap:operation soapAction="urn:serverInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTimesheetEntries">
+      <soap:operation soapAction="urn:updateTimesheetEntries" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSkillCategories">
+      <soap:operation soapAction="urn:getSkillCategories" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResourceProfileSetting">
+      <soap:operation soapAction="urn:getResourceProfileSetting" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioTypes">
+      <soap:operation soapAction="urn:getPortfolioTypes" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findEntity">
+      <soap:operation soapAction="urn:findEntity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEntitiesByFilter">
+      <soap:operation soapAction="urn:getEntitiesByFilter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMemberId">
+      <soap:operation soapAction="urn:getMemberId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainService_SOAP11HTTPS_client2_new">
+    <wsdl:port name="MainService_SOAP11HTTPS_client2_new" binding="ser:MainService_SOAP11HTTPS_client2_new_Binding" xmlns:ser="http://services">
+      <soap:address location="https://api1.innotas.com/services/MainService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

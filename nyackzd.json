@@ -1,0 +1,110 @@
+{
+    "results": [{
+        "url": "https://nyackhospital1362070169.zendesk.com/api/v2/tickets/140.json",
+        "id": 140,
+        "external_id": null,
+        "via": {
+            "channel": "api",
+            "source": {
+                "from": {},
+                "to": {},
+                "rel": null
+            }
+        },
+        "created_at": "2013-07-24T01:28:07Z",
+        "updated_at": "2013-08-23T17:22:50Z",
+        "type": "task",
+        "subject": "On-site handoff of beta sign off",
+        "description": "Task for McKesson Enterprise Clinical Reference Viewer Beta was created on 05/06/2013, is due on 05/24/2013, the duration of the task was 15 days,  and contains the description testing the description field",
+        "priority": "normal",
+        "status": "open",
+        "recipient": null,
+        "requester_id": 353701867,
+        "submitter_id": 353701867,
+        "assignee_id": 355641518,
+        "organization_id": 24107508,
+        "group_id": 20649588,
+        "collaborator_ids": [],
+        "forum_topic_id": null,
+        "problem_id": null,
+        "has_incidents": false,
+        "due_at": null,
+        "tags": ["innotas", "innotas_update"],
+        "custom_fields": [{
+            "id": 22937097,
+            "value": null
+        }, {
+            "id": 22929932,
+            "value": "true"
+        }, {
+            "id": 22939938,
+            "value": "Manage"
+        }, {
+            "id": 22420081,
+            "value": "McKesson Enterprise Clinical Reference Viewer Beta"
+        }, {
+            "id": 22924183,
+            "value": "true"
+        }, {
+            "id": 22931101,
+            "value": "05/23/2013 05:00 PM"
+        }, {
+            "id": 22941093,
+            "value": "15 days"
+        }, {
+            "id": 22326693,
+            "value": "797929315"
+        }, {
+            "id": 22924203,
+            "value": "true"
+        }, {
+            "id": 22931121,
+            "value": "true"
+        }, {
+            "id": 22924213,
+            "value": "false"
+        }],
+        "satisfaction_rating": null,
+        "sharing_agreement_ids": [],
+        "fields": [{
+            "id": 22937097,
+            "value": null
+        }, {
+            "id": 22929932,
+            "value": "true"
+        }, {
+            "id": 22939938,
+            "value": "Manage"
+        }, {
+            "id": 22420081,
+            "value": "McKesson Enterprise Clinical Reference Viewer Beta"
+        }, {
+            "id": 22924183,
+            "value": "true"
+        }, {
+            "id": 22931101,
+            "value": "05/23/2013 05:00 PM"
+        }, {
+            "id": 22941093,
+            "value": "15 days"
+        }, {
+            "id": 22326693,
+            "value": "797929315"
+        }, {
+            "id": 22924203,
+            "value": "true"
+        }, {
+            "id": 22931121,
+            "value": "true"
+        }, {
+            "id": 22924213,
+            "value": "false"
+        }],
+        "ticket_form_id": null,
+        "result_type": "ticket"
+    }],
+    "facets": null,
+    "next_page": null,
+    "previous_page": null,
+    "count": 1
+}

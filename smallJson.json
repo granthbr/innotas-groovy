@@ -1,0 +1,34 @@
+{
+    "expand": "schema,names",
+    "startAt": 0,
+    "maxResults": 50,
+    "total": 2,
+    "issues": [{
+        "expand": "editmeta,renderedFields,transitions,changelog,operations",
+        "id": "69865",
+        "self": "http://jira.machinima.com/rest/api/2/user?username=sonnymendoza",
+        "key": "INN-3",
+        "fields": {
+            "customfield_13429": null,
+            "summary": "Test Task 1",
+            "customfield_13427": null,
+            "customfield_13426": null,
+            "issuetype": {
+                "self": "http://jira.machinima.com/rest/api/2/issuetype/3",
+                "id": "3",
+                "description": "A task that needs to be done.",
+                "avatarUrls":{"16x16":"http://jira.machinima.com/secure/useravatar?size=small&amp;ownerId=sonnymendoza&avatarId=10320","48x48":"http://jira.machinima.com/secure/useravatar?ownerId=sonnymendoza&amp;ownerId=sonnymendoza&avatarId=10320"},
+                "name": "Task",
+                "subtask": false
+            },
+            "customfield_11707": [{
+                "self": "http://jira.machinima.com/rest/api/2/customFieldOption/11302",
+                "value": "Machinima (Main)",
+                "id": "11302"
+            }]
+        }
+    }]
+
+
+
+}
