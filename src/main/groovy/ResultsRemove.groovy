@@ -18,7 +18,7 @@ String xmlStr = IOUtils.toString(is);
 
 //def Node nd = new Node();
 
-def records = new XmlSlurper().parse("/Users/brandon/projects/innotas/JiraJsonXML/nyackZd.xml")
+def records = new XmlSlurper().parse("/Users/brandon/projects/innotas/JiraJsonXML/nyackd.xml")
 //def visit(node, Closure c) {
 //    node.childNodes().each { child ->
 //        c(child)
