@@ -1,7 +1,9 @@
-//GROOVY BOOMI Script to add a day using Milliseconds from 1970
-// not using Joda Time, no jar installed in atom library and Boomi atom is hosted by the customer
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+
+//GROOVY BOOMI Script to add a day using Milliseconds from 1970
+// not using Joda Time, no jar installed in atom library and Boomi atom is hosted by the customer
+
 
 def inDate = "2013-11-17T21:20:58"
 
@@ -35,11 +37,17 @@ println newInnotasformatter.format(date)
 //import java.io.InputStream;
 //import com.boomi.execution.ExecutionManager;
 //import com.boomi.execution.ExecutionUtil;
+
+
+//import java.text.DateFormat
+//import java.text.SimpleDateFormat
+
 //
 //logger = ExecutionUtil.getBaseLogger();
 //
 //def today = ExecutionManager.getCurrent().getProperty( "taskStartDate" )
 //def setDay = ExecutionManager.getCurrent().getProperty( "setDay" )
+//setDayInt = Integer.parseInt(setDay)
 //
 ////Set day in milliseconds
 //def oneDay = 86400000
